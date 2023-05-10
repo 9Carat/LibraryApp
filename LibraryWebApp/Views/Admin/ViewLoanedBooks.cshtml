@@ -1,0 +1,36 @@
+﻿@model LibraryViewModel
+@using Humanizer
+@{
+    ViewData["Title"] = "The current books are currently out on loan:";
+    char checkmark = '\u2714';
+}
+<div class="panel">
+    <div>@ViewData["Title"]</div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Book title</td>
+                <td>Username</td>
+                <td>Due date</td>
+                <td>@checkmark</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.UserName</td>
+                <td>@item.DueDate.Humanize()</td>
+                <td>
+                    <form asp-action="MarkAsReturned" method="post">
+                        <input type="checkbox" class="done-checkbox">
+                        <input type="hidden" name="id" value="@item.BookId">
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿@model AdminViewModel
+@{
+	ViewData["Title"] = "Admin Overview";
+}
+
+<div>
+	<div>@ViewData["Title"]</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>E-mail</th>
+				<th>Username</th>
+				<th>Edit/Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var user in Model.Users)
+			{
+				<tr>
+					<td>@user.Id</td>
+					<td>@user.Email</td>
+					<td>@user.UserName</td>
+					<td>
+						<a asp-controller="Admin" asp-action="DeleteUser" asp-route-Id="@user.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						<a asp-controller="Admin" asp-action="EditUser" asp-route-id="@user.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<div>
+		<a asp-action="ViewLoanedBooks"> View books currently out on loan</a>
+		<a asp-action="SearchUser"> Search for a user</a>
+	</div>
+</div>

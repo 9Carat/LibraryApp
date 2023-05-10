@@ -1,0 +1,6 @@
+﻿@model Book
+<form asp-action="BorrowBookResult" method="post">
+    <label asp-for="Title">Select the title of the book you wish to borrow</label>
+    <input asp-for="Title" />
+    <button type="submit">Save Request</button>
+</form>
