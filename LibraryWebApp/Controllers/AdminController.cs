@@ -56,8 +56,7 @@ namespace LibraryWebApp.Controllers
             {
                 return NotFound();
             }
-            IdentityUser[] users = new IdentityUser[1] { user};
-            var viewModel = new AdminViewModel() { Users = users};
+            var viewModel = new AdminViewModel() { User = user};
             return View(viewModel);
         }
         public async Task<IActionResult> DeleteUser(string id)
@@ -74,15 +73,17 @@ namespace LibraryWebApp.Controllers
             { 
                 Id = id,
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
             };
             return View(viewModel);
         }
-        public async Task<IActionResult> EditUserResult(string id, string username, string email)
+        public async Task<IActionResult> EditUserResult(string id, string username, string email, string phoneNumber)
         {
             var user = await _userManager.FindByIdAsync(id);
             user.Email = email;
             user.UserName = username;
+            user.PhoneNumber = phoneNumber;
             await _userManager.UpdateAsync(user);
             return RedirectToAction("Index");
         }

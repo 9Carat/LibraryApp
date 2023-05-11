@@ -27,10 +27,10 @@ namespace LibraryWebApp.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> BorrowBookResult(Book book)
+        public async Task<IActionResult> BorrowBookResult(string title)
         {
             var user = await _userManager.GetUserAsync (User);
-            var success = await _libraryUserService.BorrowBookAsync(book, user);
+            var success = await _libraryUserService.BorrowBookAsync(title, user);
             if (!success)
             {
 				return BadRequest("Error! Book could not be borrowed.");

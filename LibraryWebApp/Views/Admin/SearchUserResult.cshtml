@@ -1,23 +1,20 @@
 ﻿@model AdminViewModel
 
 <h1>Search results:</h1>
-<table>
+<table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
 			<th>E-mail</th>
 			<th>Username</th>
+			<th>Phone number</th>
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var user in Model.Users)
-		{
-			<tr>
-				<td>@user.Id</td>
-				<td>@user.Email</td>
-				<td>@user.UserName</td>
-			</tr>
-		}
+		<tr>
+			<td>@Model.User.Email</td>
+			<td>@Model.User.UserName</td>
+			<td>@Model.User.PhoneNumber</td>
+		</tr>
 	</tbody>
 </table>
 <div>

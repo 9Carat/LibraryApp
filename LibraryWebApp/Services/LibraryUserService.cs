@@ -12,10 +12,12 @@ namespace LibraryWebApp.Services
         {
             _context = context;
         }
-        public async Task<bool> BorrowBookAsync(Book book, IdentityUser user)
+        public async Task<bool> BorrowBookAsync(string title, IdentityUser user)
         {
+            Book book = new Book();
             book.BookId = Guid.NewGuid();
-            book.UserName = user.Id;
+            book.Title = title;
+            book.UserName = user.UserName;
             book.DueDate = DateTime.Now.AddDays(14);
             book.IsReturned = false;
             _context.Add(book);
@@ -26,7 +28,7 @@ namespace LibraryWebApp.Services
         public async Task<Book[]> GetBooksAsync(IdentityUser user)
         {
             var books = await _context.Books
-                .Where(b => b.IsReturned == false && b.UserName == user.Id)
+                .Where(b => b.IsReturned == false && b.UserName == user.UserName)
                 .ToArrayAsync();
             return books;
         }

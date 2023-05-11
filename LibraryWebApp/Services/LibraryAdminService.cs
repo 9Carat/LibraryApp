@@ -25,7 +25,7 @@ namespace LibraryWebApp.Services
         {
             var book = await _context.Books
                 .Where (b => b.BookId == id)
-                .FirstOrDefaultAsync();
+                .SingleOrDefaultAsync();
             if (book == null)
             {
 				return false;
